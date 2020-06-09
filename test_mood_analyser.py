@@ -38,7 +38,7 @@ class TestMoodAnalyser:
             analyser_object.analyse_mood()
         assert str(exception.value)=="None mood is invalid"
 
-        def test_pass_when_given_mood_analyse_class_should_return_object(self,mood_analyser_object):
+    def test_pass_when_given_mood_analyse_class_should_return_object(self,mood_analyser_object):
         assert mood_analyser_object.equals(MoodAnalyserFactory.create_mood_analyser_object
                                           ("mood_analyser","MoodAnalyser"))==True
 
