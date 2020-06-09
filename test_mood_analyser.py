@@ -67,3 +67,13 @@ class TestMoodAnalyser:
             MoodAnalyserFactory.invoke_method(MoodAnalyserFactory.create_mood_analyser_object
                             ("mood_analyser","MoodAnalyser"),"analyse_mood1")
         assert str(exception.value)=="Method not found error"
+
+    def test_pass_when_given_field_when_proper_should_return_happy(self):
+        assert MoodAnalyserFactory.invoke_method(MoodAnalyserFactory.set_field_dynamically(MoodAnalyserFactory.create_mood_analyser_object
+                            ("mood_analyser","MoodAnalyser","I am sad"),"message","I am happy"),"analyse_mood")=="happy"
+
+    def test_pass_when_given_wrong_field_should_throw_field_not_found_exception(self):
+        with pytest.raises(MoodAnalyserException) as exception:
+            assert MoodAnalyserFactory.invoke_method(MoodAnalyserFactory.set_field_dynamically(MoodAnalyserFactory.create_mood_analyser_object
+                            ("mood_analyser","MoodAnalyser","I am sad"),"message1","I am happy"),"analyse_mood")
+        assert str(exception.value)=="Field not found error"
