@@ -58,3 +58,12 @@ class TestMoodAnalyser:
                                           ("mood_analyser1","MoodAnalyser"))
         assert str(exception.value)=="Module not found error"
 
+    def test_pass_when_given_method_should_return_happy(self):
+        assert MoodAnalyserFactory.invoke_method(MoodAnalyserFactory.create_mood_analyser_object
+                            ("mood_analyser","MoodAnalyser","I am happy"),"analyse_mood")=="happy"
+
+    def test_pass_when_given_wrong_method_should_throw_method_not_found_exception(self):
+        with pytest.raises(MoodAnalyserException) as exception:
+            MoodAnalyserFactory.invoke_method(MoodAnalyserFactory.create_mood_analyser_object
+                            ("mood_analyser","MoodAnalyser"),"analyse_mood1")
+        assert str(exception.value)=="Method not found error"
